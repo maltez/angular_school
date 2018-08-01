@@ -1,3 +1,7 @@
+# Build folders
+build/
+# Mac users only
+.DS_Store
 # Logs
 logs
 *.log

@@ -1,6 +1,6 @@
 //I dont know what exactly we need to recive, so i made tupple with both most frequent examples
 
-const fibonachi: Function = function(num:number):[Array<number>, Array<number>]{
+const fibonacci: Function = function(num:number):[Array<number>, Array<number>]{
     const tupple: [Array<number>, Array<number>] = [[0], [0]];
     if (num <= 0){
         return tupple;

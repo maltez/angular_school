@@ -1,5 +1,6 @@
 # Build folders
 build/
+.idea/
 # Mac users only
 .DS_Store
 # Logs

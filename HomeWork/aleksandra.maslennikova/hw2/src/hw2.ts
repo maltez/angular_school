@@ -1,26 +1,18 @@
 
 abstract class Obj234 {
-  public abstract toString(param: object | string | number | boolean | null | undefined): string;
-  public abstract valueOf(param: object | string | number | boolean | null | undefined): number | string | object;
+  public abstract toString<T>(param: T): string;
+  public abstract valueOf<T>(param: T): number;
 }
 
 class Obj235 extends Obj234 {
-  public toString(param: object | string | number | boolean | null | undefined): string {
-
-    if (typeof param == 'object' || typeof param === 'undefined') {
-      return JSON.stringify(param)
-    }
-    return param.toString()
+  public toString<T>(param: T): string {
+    return String(param)
   }
 
-  public valueOf(param: object | string | number | boolean | null | undefined): number | string | object {
+  public valueOf<T>(param: T): number {
+    return Number(param)
 
-    if (!param) {
-      return +param
-    }
-    return param.valueOf()
   }
-
 }
 
 const myObg = new Obj235();

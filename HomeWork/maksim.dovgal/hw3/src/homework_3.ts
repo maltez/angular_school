@@ -22,6 +22,14 @@ class Converter {
 
         return b ? a : 1;
     }
+
+    protected reverseStr(str: string): string {
+        let result = '';
+        for (let i = str.length - 1; i >= 0; i--) {
+            result += str[i];
+        }
+        return result;
+    }
 }
 
 // decimal <=> binary
@@ -32,24 +40,24 @@ class BinaryConverter extends Converter implements Convert {
     }
 
     from(srcVal: number): string {
-        let tempVal = '',
-            destVal = '';
+        let tempVal = '';
+
         while (srcVal > 0) {
             tempVal += srcVal % 2;
             srcVal = this.div(srcVal, 2);
         }
-        for (let i = tempVal.length - 1; i >= 0; i--) {
-            destVal += tempVal[i];
-        }
-        return destVal;
+
+        return this.reverseStr(tempVal);
     }
 
     to(srcVal: string): number {
-        let destVal = 0;
+        let resultVal = 0;
+
         for (let i = 0; i < srcVal.length; i++) {
-            destVal += +srcVal[i]*this.sqrt(2, srcVal.length - (i + 1));
+            resultVal += +srcVal[i]*this.sqrt(2, srcVal.length - (i + 1));
         }
-        return destVal;
+
+        return resultVal;
     }
 }
 
@@ -61,16 +69,27 @@ class OctalConverter extends Converter implements Convert {
     }
 
     from(srcVal: number): string {
-        return ('' + this.div(srcVal, 8)) + (srcVal % 8);
+        let headVal = srcVal,
+            resultVal = '';
+
+        while (headVal > 8) {
+            let tempVal = headVal;
+            headVal = this.div(headVal, 8);
+            resultVal += tempVal - headVal * 8;
+        }
+
+        return this.reverseStr(resultVal + headVal);
     }
 
     to(srcVal: string): number {
-        let multVal = '',
-            taleVal = srcVal[srcVal.length - 1];
-        for (let i = 0; i < srcVal.length - 1; i++) {
-            multVal += srcVal[i];
+        let resultVal = 0;
+        srcVal = this.reverseStr(srcVal);
+
+        for (let i = 0; i < srcVal.length; i++) {
+            resultVal += +srcVal[i] * this.sqrt(8, i);
         }
-        return +multVal*8 + +taleVal;
+
+        return resultVal;
     }
 }
 
@@ -82,62 +101,72 @@ class HexadecimalConverter extends Converter implements Convert {
     }
 
     from(srcVal: number): string {
-        const headVal = this.div(srcVal, 16);
-        let taleVal: number | string = srcVal - headVal * 16;
-        switch (taleVal) {
-            case 10:
-                taleVal = 'A';
-                break;
-            case 11:
-                taleVal = 'B';
-                break;
-            case 12:
-                taleVal = 'C';
-                break;
-            case 13:
-                taleVal = 'D';
-                break;
-            case 14:
-                taleVal = 'E';
-                break;
-            case 15:
-                taleVal = 'F';
-                break;
+        let headVal: number = srcVal,
+            taleVal: number | string = '',
+            resultTale: string = '';
+
+        while (headVal > 9) {
+            let tempVal = headVal;
+            headVal = this.div(headVal, 16);
+            taleVal = tempVal - headVal * 16;
+            switch (taleVal) {
+                case 10:
+                    taleVal = 'A';
+                    break;
+                case 11:
+                    taleVal = 'B';
+                    break;
+                case 12:
+                    taleVal = 'C';
+                    break;
+                case 13:
+                    taleVal = 'D';
+                    break;
+                case 14:
+                    taleVal = 'E';
+                    break;
+                case 15:
+                    taleVal = 'F';
+                    break;
+            }
+            resultTale += taleVal;
         }
-        return ('' + headVal) + taleVal;
+
+        return ('' + headVal) + this.reverseStr(resultTale);
     }
 
     to(srcVal: string): number {
-        let taleVal: number | string = srcVal[srcVal.length - 1];
-        let headVal = '';
+        let resultVal = 0;
+        srcVal = this.reverseStr(srcVal);
 
-        for (let i = 0; i < srcVal.length - 1; i++) {
-            headVal += srcVal[i];
+        for (let i = 0, tempVal; i < srcVal.length; i++) {
+            tempVal = srcVal[i];
+            switch (tempVal) {
+                case 'A':
+                    tempVal = 10;
+                    break;
+                case 'B':
+                    tempVal = 11;
+                    break;
+                case 'C':
+                    tempVal = 12;
+                    break;
+                case 'D':
+                    tempVal = 13;
+                    break;
+                case 'E':
+                    tempVal = 14;
+                    break;
+                case 'F':
+                    tempVal = 15;
+                    break;
+                default:
+                    tempVal = +tempVal;
+            }
+            resultVal += tempVal * this.sqrt(16, i);
         }
 
-        switch (taleVal) {
-            case 'A':
-                taleVal = 10;
-                break;
-            case 'B':
-                taleVal = 11;
-                break;
-            case 'C':
-                taleVal = 12;
-                break;
-            case 'D':
-                taleVal = 13;
-                break;
-            case 'E':
-                taleVal = 14;
-                break;
-            case 'F':
-                taleVal = 15;
-                break;
-            default:
-                taleVal = +taleVal;
-        }
-        return (+headVal * 16) + taleVal;
+        return resultVal;
     }
 }
 
@@ -145,11 +174,11 @@ const binaryConverter = new BinaryConverter();
 const octalConverter = new OctalConverter();
 const hexadecimalConverter = new HexadecimalConverter();
 
-console.log(binaryConverter.from(156));
-console.log(binaryConverter.to('111001'));
+console.log(binaryConverter.from(1253));
+console.log(binaryConverter.to('10011100101'));
 
-console.log(octalConverter.from(10));
-console.log(octalConverter.to('20'));
+console.log(octalConverter.from(1253));
+console.log(octalConverter.to('2345'));
 
-console.log(hexadecimalConverter.from(30));
-console.log(hexadecimalConverter.to('8F'));
+console.log(hexadecimalConverter.from(1253));
+console.log(hexadecimalConverter.to('4E5'));

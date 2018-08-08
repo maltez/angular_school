@@ -114,7 +114,7 @@ namespace HW3 {
     console.log(new HexadecimalConverter().to('A')); //'a'
 
 
-    // version 2 with toString and ParseInt
+    // version 2  with toString and ParseInt
     class BinaryConverter1 implements Convert {
         from(value: number): string {
             if (value < 0) {

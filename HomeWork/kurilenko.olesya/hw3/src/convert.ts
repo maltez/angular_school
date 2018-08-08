@@ -3,7 +3,7 @@ namespace HW3 {
         from(value: number): string;
         to(value: string): number;
     }
-
+    // Version 1
     class BinaryConverter implements Convert {
         from(value: number): string {
             if (value <= 0) return '0';
@@ -43,7 +43,7 @@ namespace HW3 {
         from(value: number): string {
             if (value < 0) return '0';
             if (value <= 7) return this.mask[value];
-            let str: string;
+            let str: string = '';
             do {
                 var res = Math.floor(value / 8);
                 str = (this.mask[value - (8 * res)]) + str;
@@ -67,6 +67,11 @@ namespace HW3 {
             return res;
         }
     }
+    console.log(new OctalConverter().from(120)); //'78'
+    console.log(new OctalConverter().from(10)); //'a'
+
+    console.log(new OctalConverter().to('170')); //'78'
+    console.log(new OctalConverter().to('12')); //'a'
 
     class HexadecimalConverter implements Convert {
         mask: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -107,7 +112,9 @@ namespace HW3 {
 
     console.log(new HexadecimalConverter().to('78')); //'78'
     console.log(new HexadecimalConverter().to('A')); //'a'
-    // version 1
+
+
+    // version 2 with toString and ParseInt
     class BinaryConverter1 implements Convert {
         from(value: number): string {
             if (value < 0) {
@@ -153,7 +160,9 @@ namespace HW3 {
 
     console.log(new HexadecimalConverter1().from(120)); //170
     console.log(new HexadecimalConverter1().to('170')); //120
-    // Version 2
+
+    
+    // Version 3
     class Converter<T extends number=2 | 16 | 8> implements Convert {
         convertType: T;
 

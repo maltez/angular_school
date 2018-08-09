@@ -18,3 +18,5 @@
     - OctalConverter -> convert decimal to octal
     - HexadecimalConverter -> convert hex to decimal.
     - Forbidden use external convert functions only * and /;
+# Homework 4
+- Create class decorator that will be logged each invoke to functions and fields of class.

@@ -1,14 +1,18 @@
 //logger decorator
-function Logger(){
+function Logger(propsForConstr: any){
     return function (targetClass: any) {
         const target = new targetClass();
         const properties = getAllProperties(target, target);
 
-        const newClass: any = class {};
+        const NewClass: any = class {
+            constructor() {
+                console.log(`Called constructor of the instance ${this.constructor.name}`);
+            }
+        };
 
         // function logger
         function log(type: string, name: string, operation: string) {
-            console.log(`${type} ${name} have been ${operation}`);
+            console.log(`${type} '${name}' have been ${operation}`);
         }
 
         // function, which take all properties from the class
@@ -34,11 +38,15 @@ function Logger(){
                 );
 
             for (let i = 0; i < props.length; i++) {
+                if (propsForConstr[props[i]]) {
+                    methods[props[i]] = propsForConstr[props[i]];
+                    continue;
+                }
                 if (typeof Object.getPrototypeOf(copyObj[props[i]]) === 'function') {
                     // run through all properties, and at once, if property equals function, set log method to the call of the function
-                    methods[props[i]] = function([...args]: any){
-                        log('Function', props[i],'called' + (args.length > 0 ? 'with params: ' + args : ''));
-                        return copyObj[props[i]].call(this, args);
+                    methods[props[i]] = function(...args){
+                        log('Function', props[i],'called ' + (args.length > 0 ? 'with params: ' + args : ''));
+                        return copyObj[props[i]].apply(this, args);
                     };
                 }else
                     methods[props[i]] = copyObj[props[i]];
@@ -53,17 +61,17 @@ function Logger(){
         for (let i = 0; i < keys.length; i++) {
             if (typeof properties[keys[i]] === 'function'){
                 // set the functions
-                Object.defineProperty(newClass.prototype, keys[i], {
+                Object.defineProperty(NewClass.prototype, keys[i], {
                     value: properties[keys[i]],
                     enumerable: false
                 });
             }else {
                 // set the fields and getters and setters for them, which contains log function
-                Object.defineProperty(newClass.prototype, '_' + keys[i], {
+                Object.defineProperty(NewClass.prototype, '_' + keys[i], {
                     value: properties[keys[i]],
                     writable: true
                 });
-                Object.defineProperty(newClass.prototype, keys[i], {
+                Object.defineProperty(NewClass.prototype, keys[i], {
                     get: function() {
                         log('Variable', keys[i], 'getted:');
                         return this['_' + keys[i]];
@@ -76,21 +84,20 @@ function Logger(){
             }
         }
 
-        newClass.constructor = {
-
-        };
-
-        return newClass;
+        return NewClass;
     }
 }
 
-@Logger()
+@Logger({name: 'Jhon'})
 class SomeClass {
-    public name: string = 'Jhon';
+    public name: string;
+    constructor(name: string){
+        this.name = name;
+    }
 
     public addSome(str: string): void {
-        const a = 'world';
-        console.log(a + this.anotherSomeMethod(str));
+        this.name += this.anotherSomeMethod(str);
+        console.log(this.name);
     }
 
     private anotherSomeMethod(str: string): string {
@@ -98,8 +105,9 @@ class SomeClass {
     }
 }
 
-const someClass = new SomeClass();
-console.log(someClass.name)
+const someClass = new SomeClass('Jhon');
+console.log(someClass.name);
+someClass.addSome('ny');
 someClass.name = 'Vasya';
 console.log(someClass.name)
 someClass.addSome('!');

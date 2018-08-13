@@ -4,9 +4,7 @@ function Logger(){
         const target = new targetClass();
         const properties = getAllProperties(target, target);
 
-        const newClass: any = class {
-
-        };
+        const newClass: any = class {};
 
         // function logger
         function log(type: string, name: string, operation: string) {
@@ -38,11 +36,10 @@ function Logger(){
             for (let i = 0; i < props.length; i++) {
                 if (typeof Object.getPrototypeOf(copyObj[props[i]]) === 'function') {
                     // run through all properties, and at once, if property equals function, set log method to the call of the function
-                    methods[props[i]] = function(){
-                        log('Function', props[i],'called');
-                        return copyObj[props[i]].call(this);
+                    methods[props[i]] = function([...args]: any){
+                        log('Function', props[i],'called' + (args.length > 0 ? 'with params: ' + args : ''));
+                        return copyObj[props[i]].call(this, args);
                     };
-                    console.log(methods[props[i]]);
                 }else
                     methods[props[i]] = copyObj[props[i]];
             }
@@ -79,6 +76,10 @@ function Logger(){
             }
         }
 
+        newClass.constructor = {
+
+        };
+
         return newClass;
     }
 }
@@ -87,13 +88,13 @@ function Logger(){
 class SomeClass {
     public name: string = 'Jhon';
 
-    public addSome(): void {
+    public addSome(str: string): void {
         const a = 'world';
-        console.log(a + this.anotherSomeMethod());
+        console.log(a + this.anotherSomeMethod(str));
     }
 
-    private anotherSomeMethod(): string {
-        return '!';
+    private anotherSomeMethod(str: string): string {
+        return str;
     }
 }
 
@@ -101,4 +102,4 @@ const someClass = new SomeClass();
 console.log(someClass.name)
 someClass.name = 'Vasya';
 console.log(someClass.name)
-someClass.addSome();
+someClass.addSome('!');

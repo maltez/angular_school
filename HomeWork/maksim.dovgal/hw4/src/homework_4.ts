@@ -1,14 +1,47 @@
 //logger decorator
-function Logger(propsForConstr: any){
+function Logger(propsForConstr?: any){
     return function (targetClass: any) {
-        const target = new targetClass();
-        const properties = getAllProperties(target, target);
-
+        let target, properties;
         const NewClass: any = class {
-            constructor() {
-                console.log(`Called constructor of the instance ${this.constructor.name}`);
+            // age = propsForConstr.age;
+            constructor(...args: any[]) {
+                console.log(`Called constructor of the instance ${this.constructor.name} with args: ${args}`);
+                init(args);
             }
         };
+        function init(args): void {
+            target = new targetClass(...args);
+            properties = getAllProperties(target, target);
+
+            const keys = Object.keys(properties);
+
+            // set properties and values to him for the our class
+            for (let i = 0; i < keys.length; i++) {
+                if (typeof properties[keys[i]] === 'function'){
+                    // set the functions
+                    Object.defineProperty(NewClass.prototype, keys[i], {
+                        value: properties[keys[i]],
+                        enumerable: false
+                    });
+                }else {
+                    // set the fields and getters and setters for them, which contains log function
+                    Object.defineProperty(NewClass.prototype, '_' + keys[i], {
+                        value: properties[keys[i]],
+                        writable: true
+                    });
+                    Object.defineProperty(NewClass.prototype, keys[i], {
+                        get: function() {
+                            log('Variable', keys[i], 'getted:');
+                            return this['_' + keys[i]];
+                        },
+                        set: function(val) {
+                            log('Variable', keys[i], 'setted to the new value');
+                            this['_' + keys[i]] = val;
+                        }
+                    });
+                }
+            }
+        }
 
         // function logger
         function log(type: string, name: string, operation: string) {
@@ -38,7 +71,7 @@ function Logger(propsForConstr: any){
                 );
 
             for (let i = 0; i < props.length; i++) {
-                if (propsForConstr[props[i]]) {
+                if (propsForConstr && (propsForConstr[props[i]] && !copyObj[props[i]])) {
                     methods[props[i]] = propsForConstr[props[i]];
                     continue;
                 }
@@ -52,43 +85,21 @@ function Logger(propsForConstr: any){
                     methods[props[i]] = copyObj[props[i]];
             }
 
-            return methods;
-        }
-
-        const keys = Object.keys(properties);
-
-        // set properties and values to him for the our class
-        for (let i = 0; i < keys.length; i++) {
-            if (typeof properties[keys[i]] === 'function'){
-                // set the functions
-                Object.defineProperty(NewClass.prototype, keys[i], {
-                    value: properties[keys[i]],
-                    enumerable: false
-                });
-            }else {
-                // set the fields and getters and setters for them, which contains log function
-                Object.defineProperty(NewClass.prototype, '_' + keys[i], {
-                    value: properties[keys[i]],
-                    writable: true
-                });
-                Object.defineProperty(NewClass.prototype, keys[i], {
-                    get: function() {
-                        log('Variable', keys[i], 'getted:');
-                        return this['_' + keys[i]];
-                    },
-                    set: function(val) {
-                        log('Variable', keys[i], 'setted to the new value');
-                        this['_' + keys[i]] = val;
-                    }
-                });
+            for (let i in propsForConstr) {
+                if (methods[i]) continue;
+                else {
+                    methods[i] = propsForConstr[i];
+                }
             }
+
+            return methods;
         }
 
         return NewClass;
     }
 }
 
-@Logger({name: 'Jhon'})
+@Logger({age: 21})
 class SomeClass {
     public name: string;
     constructor(name: string){
@@ -105,9 +116,14 @@ class SomeClass {
     }
 }
 
-const someClass = new SomeClass('Jhon');
+function myClassFactory(str: string): SomeClass & { age: number } {
+    return new SomeClass(str) as SomeClass & { age: number };
+}
+
+const someClass = myClassFactory('Jhon');
 console.log(someClass.name);
 someClass.addSome('ny');
 someClass.name = 'Vasya';
-console.log(someClass.name)
+console.log(someClass.name);
 someClass.addSome('!');
+console.log(someClass.age);

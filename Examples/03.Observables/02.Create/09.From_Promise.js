@@ -2,7 +2,7 @@ const { Observable: { fromPromise } } = require('rxjs');
 
 const promise = new Promise((res, rej) => {
     setTimeout(() => {
-        res('Hello');
+         res('Hello');
         //rej('Hello');
     }, 500);
 });

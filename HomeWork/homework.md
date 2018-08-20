@@ -23,3 +23,9 @@
 
 # Homework 5
 - Re-wright last create observable pattern to TypeScript 
+
+# Homework 6 (TS!!!)
+- Implements from method using only Observable.create
+- Implements range methods using only Observable.create
+- Implements interval method using only Observable.create
+- Implement buffer by count and time using buffer only

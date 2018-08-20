@@ -10,7 +10,7 @@ const publisher$ = create((observable) => {
 })
 .catch((err) => {
     console.log(`Error appears: ${err.message} and centralize handle.`);
-    return Observable.of(`Error ${err.message}` );
+    return Observable.return(`Error ${err.message}` );
 });
 
 const subscriber = publisher$.subscribe(

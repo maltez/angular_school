@@ -1,12 +1,12 @@
 const { Observable } = require('rxjs');
 
-const publisher = Observable.throw('Throw an error');
+const publisher = Observable.of(1,2,3,4,5,6,7,8,9,9,10);
 
 const subscriber = publisher.subscribe(
-    () => {},
-    (err) => {
-        console.log(`Error: ${err}`);
+    (val) => {
+        console.log(`Value is: ${val}`);
     },
+    () => {},
     () => {
         console.log('Finalized');
     }

@@ -1,0 +1,6 @@
+<div class="calc-container">
+<input type="text" [value]="calcValue"/>
+  <div class="buttons-container">
+    <button class="calc-button" *ngFor="let button of buttons; let i = index" (click)="onButtonClick(i)">{{button}}</button>
+  </div>
+</div>

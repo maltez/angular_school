@@ -29,3 +29,11 @@
 - Implements range methods using only Observable.create
 - Implements interval method using only Observable.create
 - Implement buffer by count and time using buffer only
+
+# Homework 7
+- Create calculator application from image attached to HW7
+
+# Homework 8
+- Create universal component digit (input digit as input on click set @display@ value as output)
+- Create container component for the numbers
+- Create component for action(the same as digit)

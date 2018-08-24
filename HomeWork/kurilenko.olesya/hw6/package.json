@@ -1,0 +1,19 @@
+{
+  "name": "02.create",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01.create.js",
+  "dependencies": {
+    "@reactivex/rxjs": "^6.2.2",
+    "rx": "^4.1.0",
+    "rxjs": "^6.2.2",
+    "typescript": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

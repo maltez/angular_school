@@ -1,0 +1,7 @@
+<table>
+    <tr *ngFor="let items of keys">
+        <td *ngFor="let key of items">
+            <app-key-comp [key] = 'key' (clickButton) = "onClick($event)"></app-key-comp>
+        </td>
+    </tr>
+</table>

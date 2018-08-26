@@ -38,7 +38,8 @@ export class AppComponent {
         this.total = this.replaseLastOperator(this.total, '+');
         break;
       case EOperator.equally:
-        this.total = this.calculation(this.total);
+        this.total = (this.calculation2(this.total, 0));
+        //this.total = this.calculation(this.total);
         this.total = this.total.toString();
         break;
       case EOperator.number:
@@ -63,7 +64,30 @@ export class AppComponent {
   }
 
   private calculation(value: string) {
-    return eval(this.replaseLastOperator(value,''));
+    return eval(this.replaseLastOperator(value, ''));
+  }
+
+  private calculation2(value: string, result: number) {
+    let oper = '+';
+    if (['*', '+', '-', '/'].includes(value[0])) {
+      oper = value[0];
+      value = value.substr(1, value.length - 1);
+    }
+    console.log('value = ' + value + '  oper ' + oper + ' result' + result);
+    let index = -1;
+    for (let start = 0; start < value.length; start++) {
+      if (['*', '+', '-', '/'].includes(value[start])) {
+        index = start;
+        break;
+      }
+    }
+    if (index < 0) {
+      return (eval(result + oper + value));
+    }
+
+    let strNumber = value.substr(0, index);
+    value.replace(strNumber, '');
+    return (this.calculation2(value.replace(strNumber, ''), (eval(result + oper + strNumber))));
   }
 }
 

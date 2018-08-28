@@ -37,3 +37,8 @@
 - Create universal component digit (input digit as input on click set @display@ value as output)
 - Create container component for the numbers
 - Create component for action(the same as digit)
+
+# Homework 9
+- Create pipe that transform alphabetic and number characters to morse alphabet.
+- https://ru.wikipedia.org/wiki/%D0%90%D0%B7%D0%B1%D1%83%D0%BA%D0%B0_%D0%9C%D0%BE%D1%80%D0%B7%D0%B5
+- Create pipe that transform -. to characters in latin alphabet

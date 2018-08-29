@@ -1,0 +1,60 @@
+<div class="calc-body">
+    <div class="calc-input">
+        <label>Calculator</label>
+        <input type="text" disabled value="{{indicator}}"/>
+    </div>
+    <div class="keyboard">
+        <div class="row">
+            <div class="calc-button">
+                1
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                2
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                3
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                +
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                *
+            </div>
+        </div>
+        <div class="row">
+            <div class="calc-button" (click)="onClick($event)">
+                4
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                5
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                6
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                -
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                /
+            </div>
+        </div>
+        <div class="row">
+            <div class="calc-button" (click)="onClick($event)">
+                7
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                8
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                9
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                0
+            </div>
+            <div class="calc-button" (click)="onClick($event)">
+                =
+            </div>
+        </div>
+    </div>
+</div>
+

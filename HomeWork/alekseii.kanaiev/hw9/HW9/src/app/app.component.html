@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<div class="morse">
+  <h3>Convert to morse:</h3>
+  <input type="text" [(ngModel)]="str">
+  <p *ngIf="str">
+    To morse: {{ str | toMorse}}
+  </p>
+</div>
+<div class="morse">
+  <h3>Convert from morse:</h3>
+  <input type="text" [(ngModel)]="morseStr">
+  <p *ngIf="morseStr">
+    From morse: {{ morseStr | fromMorse}}
+  </p>
+</div>

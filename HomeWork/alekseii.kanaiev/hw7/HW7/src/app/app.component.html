@@ -1,0 +1,36 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<div class="calculator">
+  <h2>Calculator v.1: </h2>
+  <input type="text" [value]="value">
+    <table>
+        <tr>
+            <td><button (click) = 'clickNum($event)'>1</button></td>
+            <td><button (click) = 'clickNum($event)'>2</button></td>
+            <td><button (click) = 'clickNum($event)'>3</button></td>
+            <td><button (click) = 'clickSign($event)'>+</button></td>
+            <td><button (click) = 'clickSign($event)'>-</button></td>
+        </tr>
+        <tr>
+            <td><button (click) = 'clickNum($event)'>4</button></td>
+            <td><button (click) = 'clickNum($event)'>5</button></td>
+            <td><button (click) = 'clickNum($event)'>6</button></td>
+            <td><button (click) = 'clickSign($event)'>*</button></td>
+            <td><button (click) = 'clickSign($event)'>/</button></td>
+        </tr>
+        <tr>
+            <td><button (click) = 'clickNum($event)'>7</button></td>
+            <td><button (click) = 'clickNum($event)'>8</button></td>
+            <td><button (click) = 'clickNum($event)'>9</button></td>
+            <td><button (click) = 'clickNum($event)'>0</button></td>
+            <td><button (click) = 'clickResult()'>=</button></td>
+        </tr>
+    </table>
+</div>
+
+
+

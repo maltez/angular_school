@@ -42,3 +42,12 @@
 - Create pipe that transform alphabetic and number characters to morse alphabet.
 - https://ru.wikipedia.org/wiki/%D0%90%D0%B7%D0%B1%D1%83%D0%BA%D0%B0_%D0%9C%D0%BE%D1%80%D0%B7%D0%B5
 - Create pipe that transform -. to characters in latin alphabet
+
+# Homework 10
+- Create ColoredTable directive. Directive retrieves collection of data:
+    - [{name:, age:},..] - any flatten object
+    - Create table with rows count how many fields there
+    - Header by field name. Even column grey, Odd - white
+    - Even row blue
+    - Odd column yellow
+- Internal div to span directive.

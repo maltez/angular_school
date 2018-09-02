@@ -36,7 +36,7 @@ export class ReplaceTagsDirective implements AfterViewInit {
   }
 
   private replaceTags(el: HTMLElement | HTMLDivElement | any) {
-    if (+el.children.length <= 0) {
+    if (el.children.length <= 0) {
       if (el.nodeName.toUpperCase() === this.tagFrom.toUpperCase())
         el.outerHTML = el.outerHTML
           .replace(this.regExp[this.tagFrom], `<${this.tagTo}`)

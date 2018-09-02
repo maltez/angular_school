@@ -4,9 +4,12 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
    <input type="text" [(ngModel)]="someStr" />
-   <p>{{someStr | morze}}</p>
+   <p>{{someStr | toMorze}}</p>
+   <input type="text" [(ngModel)]="anotherSomeStr" />
+   <p>{{anotherSomeStr | fromMorze}}</p>
   `,
 })
 export class AppComponent {
   someStr: string = '';
+  anotherSomeStr: string = '';
 }

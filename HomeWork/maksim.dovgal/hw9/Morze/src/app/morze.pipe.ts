@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'morze'
+  name: 'toMorze'
 })
-export class MorzePipe implements PipeTransform {
+export class ToMorzePipe implements PipeTransform {
   dictionary = {
-    'a': '.-',
+    'а': '.-',
     'б': '-...',
     'в': '.--',
     'г': '--.',
@@ -43,7 +43,7 @@ export class MorzePipe implements PipeTransform {
     'g': '--.',
     'd': '-..',
     'e': '.',
-    'а': '.-',
+    'a': '.-',
     'v': '...-',
     'z': '--..',
     'i': '..',
@@ -91,11 +91,113 @@ export class MorzePipe implements PipeTransform {
     ' ': '\xa0\xa0\xa0',
     '@': '.--.-.'
   };
+
   transform(value: string): string {
     let res = '';
     for (let i = 0; i < value.length; i++) {
       res += this.dictionary[value[i].toLowerCase()];
       if (i !== value.length - 1) res += '\xa0';
+    }
+    return res;
+  }
+}
+
+@Pipe({
+  name: 'fromMorze'
+})
+export class FromMorzePipe implements PipeTransform {
+  dictionary = {
+    '.-': ['а', 'a'],
+    '-...': ['б', 'b'],
+    '.--': ['в', 'w'],
+    '--.': ['г', 'g'],
+    '-..': ['д', 'd'],
+    '.': ['е', 'e'],
+    '...-': ['ж', 'v'],
+    '--..': ['з', 'z'],
+    '..': ['и', 'i'],
+    '.---': ['й', 'j'],
+    '-.-': ['к', 'k'],
+    '.-..': ['л', 'l'],
+    '--': ['м', 'm'],
+    '-.': ['н', 'n'],
+    '---': ['о', 'o'],
+    '.--.': ['п', 'p'],
+    '.-.': ['р', 'r'],
+    '...': ['с', 's'],
+    '-': ['т', 't'],
+    '..-': ['у', 'u'],
+    '..-.': ['ф', 'f'],
+    '....': ['х', 'h'],
+    '-.-.': ['ц', 'c'],
+    '---.': 'ч',
+    '----': 'ш',
+    '--.-': ['щ', 'q'],
+    '-.--': ['ы', 'y'],
+    '-..-': ['ь', 'x'],
+    '..-..': 'э',
+    '..--': 'ю',
+    '.-.-': 'я',
+    '.----': '1',
+    '..---': '2',
+    '...--': '3',
+    '....-': '4',
+    '.....': '5',
+    '-....': '6',
+    '--...': '7',
+    '---..': '8',
+    '----.': '9',
+    '-----': '0',
+    '......': '.',
+    '---...': ':',
+    '.-.-.-': ',',
+    '-.-.-.': ';',
+    '-.--.-': '(',
+    '.----.': '`',
+    '.-..-.': '"',
+    '-....-': '-',
+    '-..-.': '\\',
+    '..--..': '?',
+    '--..--': '!',
+    '.--.-.': '@'
+  };
+
+  transform(value: string, language: string = 'en'): string {
+    let res = '',
+        isSpace = false,
+        longSpace = 0;
+    // switch language
+    const lang = language === 'en' ? 1 : 0;
+    for (let i = 0, temp = ''; i < value.length; i++) {
+      if (isSpace || (value.length - 1 === i)) {
+        if (value.length - 1 === i) {
+          temp += value[i];
+        }
+
+        if( this.dictionary[temp]) {
+          if (typeof this.dictionary[temp] === 'object') {
+            res += this.dictionary[temp][lang];
+          } else {
+            res += this.dictionary[temp];
+          }
+        }
+
+        if (value[i + 1] !== ' ') {
+          isSpace = !isSpace;
+          if (longSpace > 3) res += ' ';
+          longSpace = 0;
+        } else {
+          longSpace += 1;
+        }
+
+        temp = '';
+      } else {
+        temp += value[i];
+
+        if (value[i + 1] === ' ') {
+          isSpace = !isSpace;
+        }
+      }
     }
     return res;
   }

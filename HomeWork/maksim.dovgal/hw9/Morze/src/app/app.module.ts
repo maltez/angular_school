@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { MorzePipe } from './morze.pipe';
+import { ToMorzePipe, FromMorzePipe } from './morze.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MorzePipe
+    ToMorzePipe,
+    FromMorzePipe
   ],
   imports: [
     BrowserModule,

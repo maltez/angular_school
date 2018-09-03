@@ -24,22 +24,22 @@ export class AppComponent {
 
         if ('+-*/'.includes(operator)) {
             this._operation = operator;
-            this.memory = parseInt(this.indicator);
+            this.memory = parseFloat(this.indicator);
             this.needClear = true;
         }
         if ('='.includes(operator)) {
             switch (this._operation) {
                 case '+':
-                    this.indicator = (this.memory + parseInt(this.indicator)).toString();
+                    this.indicator = (this.memory + parseFloat(this.indicator)).toString();
                     break;
                 case '-':
-                    this.indicator = (this.memory - parseInt(this.indicator)).toString();
+                    this.indicator = (this.memory - parseFloat(this.indicator)).toString();
                     break;
                 case '*':
-                    this.indicator = (this.memory * parseInt(this.indicator)).toString();
+                    this.indicator = (this.memory * parseFloat(this.indicator)).toString();
                     break;
                 case '/':
-                    this.indicator = (this.memory / parseInt(this.indicator)).toString();
+                    this.indicator = (this.memory / parseFloat(this.indicator)).toString();
                     break;
                 default:
                     throw new Error('Unknown operator');

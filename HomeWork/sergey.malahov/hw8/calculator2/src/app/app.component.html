@@ -1,0 +1,27 @@
+<div class="calc-body">
+    <div class="calc-input">
+        <label>Calculator</label>
+        <input type="text" disabled value="{{indicator}}"/>
+    </div>
+    <div class="keyboard">
+        <div class="row">
+            <button-component *ngFor="let operator of ['1', '2', '3', '+', '*']"
+                              [operator]="operator"
+                              (clicked)='onClick($event)'>
+            </button-component>
+        </div>
+        <div class="row">
+            <button-component *ngFor="let operator of ['4', '5', '6', '-', '/']"
+                              [operator]="operator"
+                              (clicked)='onClick($event)'>
+            </button-component>
+        </div>
+        <div class="row">
+            <button-component *ngFor="let operator of ['7', '8', '9', '0', '=']"
+                              [operator]="operator"
+                              (clicked)='onClick($event)'>
+            </button-component>
+        </div>
+    </div>
+</div>
+

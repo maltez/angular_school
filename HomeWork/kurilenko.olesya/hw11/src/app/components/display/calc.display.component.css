@@ -1,0 +1,30 @@
+.screen {
+  height: 65px;
+  width: 67%;
+  position:absolute;
+  top:7px; left:85px;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 27px;
+  font-weight:normal;
+  line-height: 40px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  letter-spacing: 1px;
+}
+.history {
+  height: 15px;
+  top:0px;
+  font-size: 10px;
+  height: 15px;
+  text-align: right;
+  color: light-grey;
+  line-height: 0px;
+  padding-right:3px;
+}
+.total{
+  top:0px;
+  line-height: 0px;
+  font-size: 25px;
+  padding-right:3px;
+}

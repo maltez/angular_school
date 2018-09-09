@@ -17,7 +17,21 @@ export class CalcButtonComponent implements calcButtonInterface {
   text: string = '';
 
   public onClick() {
-    this.calcService.Apply(this);
+    switch (this.buttonType) {
+      case eButtonType.numeric:
+      this.calcService.setNumber(this.text);
+      break;
+      case eButtonType.manipulation:
+      this.calcService.operation(this.text);
+      break;
+      case eButtonType.computing:
+      this.calcService.calculate(this.text);
+      break;
+      case eButtonType.clear:
+      this.calcService.clear();
+      default:
+        break;
+    }
   }
 
   constructor(private calcService: CalcService) {

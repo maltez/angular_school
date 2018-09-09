@@ -15,30 +15,10 @@ export class CalcService {
       history: ''
     };
 
-    public Apply(click:calcButtonInterface): void {
-
-        this.calcObservable.emit(this.setInformation(click));
-    }
-    private setInformation(info: calcButtonInterface): CalcInformationInterface {
-
-      switch (info.buttonType) {
-        case eButtonType.numeric:
-         return this.setNumber(info.text);
-        case eButtonType.manipulation:
-          return this.manipulation(info.text)
-        case eButtonType.computing:
-        return this.equally(info.text);
-        case eButtonType.clear:
-        return this.setCalcInformation(true, '', '', '', '0', '');
-        default:
-          break;
-      }
-     return this.calcInformation;
-    }
-    private setNumber(number:string): CalcInformationInterface {
+    public setNumber(number:string): void {
 
       if (this.calcInformation.isInputNumber1) {
-        return this.setCalcInformation(
+         this.setCalcInformation(
           true,
           this.calcInformation.firstNumber + number,
           '',
@@ -48,7 +28,7 @@ export class CalcService {
         );
       }
       else {
-        return this.setCalcInformation(
+         this.setCalcInformation(
           false,
           this.calcInformation.firstNumber,
           this.calcInformation.secondNumber + number,
@@ -57,10 +37,11 @@ export class CalcService {
           this.calcInformation.history + number
         );
       }
+      this.calcObservable.emit(this.calcInformation);
     }
-    private manipulation (number:string): CalcInformationInterface {
+    public operation (number:string): void {
       if (this.calcInformation.isInputNumber1) {
-        return this.setCalcInformation(
+        this.setCalcInformation(
           false,
           this.calcInformation.firstNumber,
           '',
@@ -70,7 +51,7 @@ export class CalcService {
         );
       }
       else {
-        return this.setCalcInformation(
+        this.setCalcInformation(
           false,
           parseFloat(eval(this.calcInformation.firstNumber + this.calcInformation.manipulation + this.calcInformation.secondNumber)).toString(),
           '',
@@ -79,10 +60,11 @@ export class CalcService {
           this.calcInformation.history + number
         );
       }
+      this.calcObservable.emit(this.calcInformation);
     }
 
-    private equally(number:string): CalcInformationInterface {
-      return this.setCalcInformation(
+    public calculate(number:string): void {
+       this.setCalcInformation(
         true,
         parseFloat(eval(this.calcInformation.firstNumber + this.calcInformation.manipulation + this.calcInformation.secondNumber)).toString(),
         '',
@@ -90,7 +72,14 @@ export class CalcService {
         parseFloat(eval(this.calcInformation.firstNumber + this.calcInformation.manipulation + this.calcInformation.secondNumber)).toString(),
         this.calcInformation.history + '='+parseFloat(eval(this.calcInformation.firstNumber + this.calcInformation.manipulation + this.calcInformation.secondNumber)).toString()
       );
+      this.calcObservable.emit(this.calcInformation);
     }
+
+    public clear():void {
+      this.setCalcInformation(true, '', '', '', '0', '');
+      this.calcObservable.emit(this.calcInformation);
+    }
+
 
     private setCalcInformation(isInputFistNum: boolean, first: string, second: string, manipulation: string, total: string, historyStr: string): CalcInformationInterface {
 

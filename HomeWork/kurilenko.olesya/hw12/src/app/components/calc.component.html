@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="calculator">
+
+  <div class="top">
+  <calc-button
+  [className]=button.className
+  [buttonType]=button.buttonType
+  [text]=button.text
+    >
+  </calc-button>
+    <display></display>
+	</div>
+
+  <div class="keys">
+  <calc-button *ngFor="let buttonData of buttons"
+    [className]=buttonData.className
+      [buttonType]=buttonData.buttonType
+      [text]=buttonData.text
+      >
+    </calc-button>
+	</div>
+</div>

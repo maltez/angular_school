@@ -4,7 +4,7 @@ import { calcButtonInterface } from '../interfaces/calcButtonInterface';
 import { eButtonType } from '../enums/eButtonType';
 
 export class CalcService {
-    public observable: EventEmitter<CalcInformationInterface> = new EventEmitter();
+    public calcObservable: EventEmitter<CalcInformationInterface> = new EventEmitter();
     public calcInformation:CalcInformationInterface= {
       firstNumber: '',
       secondNumber: '',
@@ -15,11 +15,11 @@ export class CalcService {
       history: ''
     };
 
-    public sendClick(click:calcButtonInterface): void {
+    public Apply(click:calcButtonInterface): void {
 
-        this.observable.emit(this.clickHander(click));
+        this.calcObservable.emit(this.setInformation(click));
     }
-    private clickHander(info: calcButtonInterface): CalcInformationInterface {
+    private setInformation(info: calcButtonInterface): CalcInformationInterface {
 
       switch (info.buttonType) {
         case eButtonType.numeric:

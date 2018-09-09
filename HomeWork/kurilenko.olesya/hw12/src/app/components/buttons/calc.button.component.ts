@@ -17,7 +17,7 @@ export class CalcButtonComponent implements calcButtonInterface {
   text: string = '';
 
   public onClick() {
-    this.calcService.sendClick(this);
+    this.calcService.Apply(this);
   }
 
   constructor(private calcService: CalcService) {

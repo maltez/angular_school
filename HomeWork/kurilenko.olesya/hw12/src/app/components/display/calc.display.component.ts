@@ -20,9 +20,8 @@ export class CalcDisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.calcService.observable.subscribe(
+    this.calcService.calcObservable.subscribe(
       (value) => {
-
         this.total = value.resultStr;
         this.history = value.history;
       }

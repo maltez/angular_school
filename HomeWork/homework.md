@@ -51,3 +51,9 @@
     - Even row blue
     - Odd column yellow
 - Internal div to span directive.
+
+# Homework 11
+- Re-wright calculator on redux architecture.
+
+# Homework 11
+- Re-wright calculator on service oriented architecture.(redux forbidden)

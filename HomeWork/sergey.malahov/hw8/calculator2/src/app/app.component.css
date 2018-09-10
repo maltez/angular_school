@@ -1,0 +1,41 @@
+.calc-body {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 360px;
+    margin: 15px;
+    border: solid 1px;
+    font-family: sans-serif;
+}
+
+.calc-input {
+    margin: 15px;
+}
+
+.calc-input input {
+    height: 30px;
+    width: 100%;
+    cursor: not-allowed;
+    text-align: right;
+    font-size: 20px;
+}
+
+.row {
+    display: flex;
+}
+
+.calc-button {
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+    border: solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.calc-button:hover {
+    background-color: gray;
+}

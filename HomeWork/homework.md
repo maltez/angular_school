@@ -55,5 +55,11 @@
 # Homework 11
 - Re-wright calculator on redux architecture.
 
-# Homework 11
+# Homework 12
 - Re-wright calculator on service oriented architecture.(redux forbidden)
+
+# Homework 13
+- Rewright calculator on modules. Numbers. Screen and Operations.
+
+# Homework 14
+- Use JS. Implement fibonachi number service use TDD. Use BDD too.

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import store from './store/store';
-import actions from './store/actions';
+import store from '../store/store';
+import actions from '../store/actions';
 
 const { CE, C, BACK_SPACE, DIVIDE, NEG_POS, MULTIPLY, MINUS, PLUS, EQUAL, NUMBER } = actions;
 

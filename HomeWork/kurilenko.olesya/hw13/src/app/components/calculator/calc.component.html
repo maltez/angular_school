@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="calculator">
+
+  <div class="top">
+    <keyboard-clear [text]=templateC.text [className]=templateC.className></keyboard-clear>
+
+    <display></display>
+  </div>
+  <table>
+  <tr class="keys" *ngFor="let rows of template">
+      <td *ngFor="let element of rows.row">
+          <keyboard-calculate *ngIf="element.className==='eval'" [text]=element.text [className]=element.className ></keyboard-calculate>
+          <keyboard-operation *ngIf="element.className==='operator'" [text]=element.text [className]=element.className ></keyboard-operation>
+          <keyboard-number *ngIf="element.className==='key'" [text]=element.text [className]=element.className ></keyboard-number>
+      </td>
+        </tr>
+</table>
+</div>

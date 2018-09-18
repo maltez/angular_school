@@ -1,0 +1,24 @@
+<table>
+    <tr *ngFor="let items of numKeys first as isFirst">
+        <ng-template ngFor let-key [ngForOf]="items" let-isLast = 'last'>
+            <td *ngIf="!isFirst || !isLast">
+                <app-numbers-comp [key] = 'key'></app-numbers-comp>
+            </td>
+            <td class = 'null' rowspan = '2' *ngIf="isFirst && isLast">
+                <app-numbers-comp [key] = 'key'></app-numbers-comp>
+            </td>
+        </ng-template>
+    </tr>
+</table>
+<table>
+    <tr *ngFor="let items of signKeys; last as isLast">
+        <ng-template ngFor let-key [ngForOf]="items">
+            <td *ngIf="!isLast">
+                <app-operations-comp [key] = 'key'></app-operations-comp>
+            </td>
+            <td colspan = '2' *ngIf="isLast">
+                <app-operations-comp [key] = 'key'></app-operations-comp>
+            </td>
+        </ng-template>
+    </tr>
+</table>

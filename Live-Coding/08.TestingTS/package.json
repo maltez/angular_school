@@ -1,0 +1,39 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "jest": {
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/test/.*\\.(ts|js)$",
+    "coverageReporters": [
+      "html"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ]
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/jest": "^20.0.8",
+    "chai": "^4.1.2",
+    "jest": "^21.0.1",
+    "ts-jest": "^21.0.0",
+    "typescript": "^2.5.2"
+  },
+  "scripts": {
+    "test": "node node_modules/.bin/jest test --watch --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

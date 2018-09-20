@@ -1,0 +1,7 @@
+.conteiner{
+  display: block;
+}
+.conteiner div{
+  float: left;
+  padding: 5px 10px;
+}

@@ -1,0 +1,27 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="calculator">
+	<div class="top">
+    <span class="clear" (click)='operatorClick(EOperator.clear)'>C</span>
+		<input class="screen" disabled [value]=total/>
+	</div>
+
+	<div class="keys">
+		<span  (click)='operatorClick(EOperator.number, 7 )'>7</span>
+		<span  (click)='operatorClick(EOperator.number, 8)'>8</span>
+		<span  (click)='operatorClick(EOperator.number, 9)'>9</span>
+		<span class="operator" (click)='operatorClick(EOperator.addition)'>+</span>
+		<span  (click)='operatorClick(EOperator.number, 4)'>4</span>
+		<span  (click)='operatorClick(EOperator.number, 5)'>5</span>
+		<span  (click)='operatorClick(EOperator.number, 6)'>6</span>
+		<span class="operator" (click)='operatorClick(EOperator.subtraction)'>-</span>
+		<span  (click)='operatorClick(EOperator.number, 1)'>1</span>
+		<span  (click)='operatorClick(EOperator.number, 2)'>2</span>
+		<span  (click)='operatorClick(EOperator.number, 3)'>3</span>
+		<span class="operator" (click)='operatorClick(EOperator.division)'>÷</span>
+		<span  (click)='operatorClick(EOperator.number, 0)'>0</span>
+		<span  (click)='operatorClick(EOperator.point, ".")'>.</span>
+		<span class="eval" (click)='operatorClick(EOperator.equally)'>=</span>
+		<span class="operator" (click)='operatorClick(EOperator.multiplication)'>x</span>
+	</div>
+</div>
+
